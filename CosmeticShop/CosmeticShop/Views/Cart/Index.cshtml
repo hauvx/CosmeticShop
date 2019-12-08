@@ -1,0 +1,99 @@
+﻿@model Web42Shop.ViewModels.CartViewModel
+@{ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/Users/_IndexLayout.cshtml";
+}
+
+<div class="container-fluid section" id="CartItemContainer">
+<div class="container">
+    <h1 class="section__title">
+        Giỏ hàng <i class="fas fa-shopping-cart"></i>
+    </h1>
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên hàng</th>
+            <th scope="col" class="clCenter">Số lượng</th>
+            <th scope="col" class="clCenter">Thành tiền</th>
+            <th scope="col" class="clCenter">Hủy sản phẩm</th>
+        </tr>
+        
+        @{ 
+            int totalePrice = 0;
+            int stt = 1;
+        }
+        @foreach (var item in Model.CartItemViewModels)
+        {
+            <tr>
+                <th scope="row">@stt</th>
+                <td>@item.Name</td>
+                <td class="clCenter"><a onclick="minusItem(@item.Id)" class="CartEdit"><i class="fas fa-minus"></i></a>@item.Quantity<a onclick="plusItem(@item.Id)" class="CartEdit"><i class="fas fa-plus"></i></a></td>
+                <td class="clCenter">@item.TotalPrice</td>
+                <td class="clCenter">
+                    <!--<p onclick="deleteItem(@item.Id)" class="point btn btn-secondary btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i></p>-->
+                    <p onclick="deleteItem(@item.Id)" class="point btn btn-secondary btn-sm"><i class="fas fa-times"></i></p>
+                </td>
+            </tr>
+            totalePrice += item.TotalPrice;
+            stt++;
+        }
+    </table>
+    
+    @if (Context.Session.GetInt32("IdTaiKhoan") == null)
+    {
+        if (Context.Session.GetInt32("IdCart") != null)
+        {
+            int anocart_id = (int)Context.Session.GetInt32("IdCart");
+            <a asp-controller="Checkout" asp-action="MustSignUp" class="button button--gotocheckout" asp-route-anocartid="@anocart_id">THANH TOÁN</a>
+        }
+    }
+    else
+    {
+        int userid = (int)Context.Session.GetInt32("IdTaiKhoan");
+        <a asp-controller="Checkout" asp-action="AlreadySignUp" class="button button--gotocheckout" asp-route-userid="@userid">THANH TOÁN</a>
+    }
+    </div>
+</div>
+    
+
+
+<script>
+function plusItem(id) {
+    $.ajax({
+        url: "/cart/PlusItem",
+        method: "POST",
+        data: { id: id },
+        async: true,
+        dataType: "HTML",
+        success: function (data) {
+            $("#CartItemContainer").html(data);
+                                }
+                            });
+                        };
+function minusItem(id) {
+    $.ajax({
+        url: "/cart/MinusItem",
+        method: "POST",
+        data: { id: id },
+        async: true,
+        dataType: "HTML",
+        success: function (data) {
+            $("#CartItemContainer").html(data);
+                                }
+                            });
+                    };
+
+function deleteItem(id) {
+    $.ajax({
+        url: "/cart/DeleteItem",
+        method: "POST",
+        data: { id: id },
+        async: true,
+        dataType: "HTML",
+        success: function (data) {
+            $("#CartItemContainer").html(data);
+                            }
+                        });
+                    }
+</script>
