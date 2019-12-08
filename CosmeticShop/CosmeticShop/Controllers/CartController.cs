@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using CosmeticShop.ModelsPayPal;
 
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class CartController : Controller
     {
@@ -28,7 +28,7 @@ namespace Web42Shop.Controllers
             if (HttpContext.Session.GetString("IdTaiKhoan") == null)
             {
                 ViewBag.Hau = 1;
-                if (HttpContext.Session.GetString("IdCart") != null)
+                if (HttpContext.Session.GetInt32("IdCart") != null)
                 {
                     cartItem = await (from d in _context.AnoCartDetails
                                       join c in _context.AnoCarts
@@ -108,7 +108,7 @@ namespace Web42Shop.Controllers
             if (product == null) return -1;
 
             //tai khoan chua dang nhap
-            if (HttpContext.Session.GetString("IdTaiKhoan") == null)
+            if (HttpContext.Session.GetInt32("IdTaiKhoan") == null)
             {
                 //khởi tạo cart lần đầu
                 if (HttpContext.Session.GetInt32("IdCart") == null)

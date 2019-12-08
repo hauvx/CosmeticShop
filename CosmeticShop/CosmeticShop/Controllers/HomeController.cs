@@ -8,7 +8,7 @@ using CosmeticShop.Data;
 using CosmeticShop.Models;
 using CosmeticShop.ViewModels;
 
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class HomeController : Controller
     {

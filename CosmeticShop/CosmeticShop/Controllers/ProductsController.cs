@@ -9,7 +9,7 @@ using CosmeticShop.Data;
 using CosmeticShop.Models;
 using CosmeticShop.ViewModels;
 
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class ProductsController : Controller
     {
@@ -57,6 +57,8 @@ namespace Web42Shop.Controllers
                 ProductTypes = await _context.ProductTypes.ToListAsync(),
                 OrderBy = TypeUrl.ToLower()
             };
+           
+            var productType = _context.ProductTypes.FirstOrDefaultAsync(m => m.URL == TypeUrl);
             return View(viewmodel);
         }
         [HttpGet]

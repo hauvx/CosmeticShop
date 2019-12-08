@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using CosmeticShop.Data;
 using CosmeticShop.Models;
 
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class ProductBrandsController : Controller
     {
