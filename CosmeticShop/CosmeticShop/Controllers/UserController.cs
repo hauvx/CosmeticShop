@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Web42Shop.Models;
-using Web42Shop.Data;
-using Web42Shop.ViewModels;
+using CosmeticShop.Models;
+using CosmeticShop.Data;
+using CosmeticShop.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +19,9 @@ namespace Web42Shop.Controllers
 {
     public class UserController : Controller
     {
-        private readonly Web42ShopDbContext _context;
+        private readonly CosmeticShopDbContext _context;
 
-        public UserController(Web42ShopDbContext context)
+        public UserController(CosmeticShopDbContext context)
         {
             _context = context;
         }

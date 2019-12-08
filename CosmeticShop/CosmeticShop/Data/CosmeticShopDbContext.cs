@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Web42Shop.Models;
-using Web42Shop.ViewModels;
+using CosmeticShop.Models;
+using CosmeticShop.ViewModels;
 
-namespace Web42Shop.Data
+namespace CosmeticShop.Data
 { 
-    public class Web42ShopDbContext:DbContext
+    public class CosmeticShopDbContext:DbContext
     {
         // sương
-        public Web42ShopDbContext(DbContextOptions<Web42ShopDbContext> options) : base(options) { }
+        public CosmeticShopDbContext(DbContextOptions<CosmeticShopDbContext> options) : base(options) { }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Cart> Carts{get;set;}
         public DbSet<CartDetail> CartDetails{get;set;}

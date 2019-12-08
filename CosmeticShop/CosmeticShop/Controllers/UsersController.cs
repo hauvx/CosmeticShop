@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Web42Shop.Data;
-using Web42Shop.Models;
+using CosmeticShop.Data;
+using CosmeticShop.Models;
 
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly Web42ShopDbContext _context;
+        private readonly CosmeticShopDbContext _context;
 
-        public UsersController(Web42ShopDbContext context)
+        public UsersController(CosmeticShopDbContext context)
         {
             _context = context;
         }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Web42Shop.Models
+namespace CosmeticShop.Models
 {
     public class APICheckoutV3
     {

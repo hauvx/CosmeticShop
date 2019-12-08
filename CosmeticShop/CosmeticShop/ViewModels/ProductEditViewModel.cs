@@ -1,9 +1,9 @@
-using Web42Shop.Models;
+using CosmeticShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 
-namespace Web42Shop.ViewModels
+namespace CosmeticShop.ViewModels
 {
     public class ProductEditViewModel
     {

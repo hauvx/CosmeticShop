@@ -7,22 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Web42Shop.Models;
-using Web42Shop.Data;
-using Web42Shop.ViewModels;
+using CosmeticShop.Models;
+using CosmeticShop.Data;
+using CosmeticShop.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly Web42ShopDbContext _context;
+        private readonly CosmeticShopDbContext _context;
         private readonly IHostingEnvironment _hostingEnviroment;
        
-        public AdminController(Web42ShopDbContext context, IHostingEnvironment hostingEnvironment)
+        public AdminController(CosmeticShopDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
             _hostingEnviroment = hostingEnvironment;

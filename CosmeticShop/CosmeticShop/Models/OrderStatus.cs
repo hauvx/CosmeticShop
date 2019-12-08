@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Web42Shop.Models
+namespace CosmeticShop.Models
 {
     public class OrderStatus
     {

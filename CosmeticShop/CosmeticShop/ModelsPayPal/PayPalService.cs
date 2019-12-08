@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-namespace Web42Shop.ModelsPayPal
+namespace CosmeticShop.ModelsPayPal
 {
     public class PayPalService
     {

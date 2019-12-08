@@ -4,17 +4,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Web42Shop.Data;
-using Web42Shop.Models;
-using Web42Shop.ViewModels;
+using CosmeticShop.Data;
+using CosmeticShop.Models;
+using CosmeticShop.ViewModels;
 
 namespace Web42Shop.Controllers
 {
     public class HomeController : Controller
     {
-        private Web42ShopDbContext _context;
+        private CosmeticShopDbContext _context;
         
-        public HomeController(Web42ShopDbContext context)
+        public HomeController(CosmeticShopDbContext context)
         {
             _context = context;
         }

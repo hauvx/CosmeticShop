@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web42Shop.Models
+namespace CosmeticShop.Models
 {
     public class AnoCart
     {

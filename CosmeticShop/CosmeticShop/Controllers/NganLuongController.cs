@@ -6,16 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Web42Shop.Data;
-using Web42Shop.Models;
-using Web42Shop.ModelsPayPal;
+using CosmeticShop.Data;
+using CosmeticShop.Models;
+using CosmeticShop.ModelsPayPal;
 
 namespace Web42Shop.Controllers
 {
     public class NganLuongController : Controller
     {
-        private readonly Web42ShopDbContext db;
-        public NganLuongController(Web42ShopDbContext context)
+        private readonly CosmeticShopDbContext db;
+        public NganLuongController(CosmeticShopDbContext context)
         {
             db = context;
         }

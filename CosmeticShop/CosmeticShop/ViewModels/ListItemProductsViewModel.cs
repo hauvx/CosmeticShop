@@ -1,8 +1,8 @@
-using Web42Shop;
-using Web42Shop.Data;
-using Web42Shop.Models;
+using CosmeticShop;
+using CosmeticShop.Data;
+using CosmeticShop.Models;
 using System.Collections.Generic;
-namespace Web42Shop.ViewModels
+namespace CosmeticShop.ViewModels
 {
     public class ListItemProductsViewModel
     {

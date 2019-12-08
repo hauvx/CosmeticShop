@@ -6,7 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Web42Shop.ModelsPayPal
+namespace CosmeticShop.ModelsPayPal
 {
     public class PTDHolder
     {

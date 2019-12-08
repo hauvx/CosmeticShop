@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Web42Shop.Models
+namespace CosmeticShop.Models
 {
     public static class UrlFriendly
     {

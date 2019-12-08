@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class PaypalController : Controller
     {
@@ -17,7 +17,7 @@ namespace Web42Shop.Controllers
         public ActionResult PaypalView(string item, string sum)
         {
             //sương
-            Web42Shop.Models.PaypalModel paypal = new Models.PaypalModel();
+            CosmeticShop.Models.PaypalModel paypal = new Models.PaypalModel();
             paypal.cmd = "_xclick";
             paypal.business = _iconfiguration.GetSection("appSettings").GetSection("BusinessAccountKey").Value;
 

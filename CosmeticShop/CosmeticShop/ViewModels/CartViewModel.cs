@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Web42Shop.Models;
+using CosmeticShop.Models;
 
-namespace Web42Shop.ViewModels
+namespace CosmeticShop.ViewModels
 {
     public class CartViewModel
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Web42Shop.Controllers
+namespace CosmeticShop.Controllers
 {
     public class MyTool
     {

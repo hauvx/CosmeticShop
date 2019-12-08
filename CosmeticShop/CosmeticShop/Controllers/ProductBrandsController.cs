@@ -6,16 +6,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Web42Shop.Data;
-using Web42Shop.Models;
+using CosmeticShop.Data;
+using CosmeticShop.Models;
 
 namespace Web42Shop.Controllers
 {
     public class ProductBrandsController : Controller
     {
-        private readonly Web42ShopDbContext _context;
+        private readonly CosmeticShopDbContext _context;
 
-        public ProductBrandsController(Web42ShopDbContext context)
+        public ProductBrandsController(CosmeticShopDbContext context)
         {
             _context = context;
         }

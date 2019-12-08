@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Web42Shop.Models;
-using Web42Shop.ViewModels;
-using Web42Shop.Data;
+using CosmeticShop.Models;
+using CosmeticShop.ViewModels;
+using CosmeticShop.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Web42Shop.ModelsPayPal;
+using CosmeticShop.ModelsPayPal;
 
 namespace Web42Shop.Controllers
 {
     public class CheckoutController : Controller
     {
-        private Web42ShopDbContext _context;
-        public CheckoutController(Web42ShopDbContext context)
+        private CosmeticShopDbContext _context;
+        public CheckoutController(CosmeticShopDbContext context)
         {
             _context = context;
         }
