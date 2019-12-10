@@ -4,14 +4,16 @@
     <div class="container txt-left">
 
         <a href="~/" class="topmenu__href">TRANG CHỦ</a>
+        <a href="~/products/orderbydatecreate" class="topmenu__href">SẢN PHẨM</a>
         @{
             int n = Model.ProductTypes.Count;
             @if (n > 0)
             {
-                <div class="topmenu__href topmenu__href--dropdown" >
-                    <a href="#">SẢN PHẨM<i class="fas fa-caret-down "></i></a>
+
+                <div class="topmenu__href topmenu__href--dropdown">
+                    <a href="#">LOẠI SẢN PHẨM<i class="fas fa-caret-down "></i></a>
                     <div class="iblck mrg0 padd0 txt-center topmenu__submenu ">
-                        @for (int i = 0; i <= 4; i++)
+                        @for (int i = 0; i < n; i++)
                         {
                             var type = Model.ProductTypes[i] as ProductType;
                             ViewBag.hau = type;
@@ -20,9 +22,10 @@
                     </div>
 
                 </div>
-              
-               
+
+
             }
+           
         }
         <a href="#" class="topmenu__href">LIÊN HỆ</a>
         <a href="#" class="topmenu__href">ABOUT</a>

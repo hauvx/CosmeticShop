@@ -59,6 +59,9 @@ namespace CosmeticShop.Controllers
             };
            
             var productType = _context.ProductTypes.FirstOrDefaultAsync(m => m.URL == TypeUrl);
+
+            String ten = productType.Result.Type;
+            ViewBag.TenType = ten;
             return View(viewmodel);
         }
         [HttpGet]

@@ -42,7 +42,9 @@ namespace CosmeticShop.Controllers
                                           Name = p.Name,
                                           Quantity = d.Quantity,
                                           Price = d.PriceSingle,
-                                          TotalPrice = d.PriceTotal
+                                          TotalPrice = d.PriceTotal,
+                                          TenAnh = p.Thumbnail
+                                       
                                       }).ToListAsync();
                 }
                 foreach (var item in cartItem)
@@ -64,7 +66,8 @@ namespace CosmeticShop.Controllers
                                         Name = p.Name,
                                         Quantity = d.Quantity,
                                         Price = d.PriceSingle,
-                                        TotalPrice = d.PriceTotal
+                                        TotalPrice = d.PriceTotal,
+                                        TenAnh = p.Thumbnail
                                     }).ToListAsync();
                 foreach (var item in cartItem)
                 {

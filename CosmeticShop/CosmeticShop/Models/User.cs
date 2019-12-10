@@ -83,6 +83,7 @@ namespace CosmeticShop.Models
         public ICollection<CommentReply> CommentReplies { get; set; }
         public ICollection<Cart> Carts { get; set; }
         public ICollection<Order> Orders { get; set; }
+
         #endregion
     }
 }

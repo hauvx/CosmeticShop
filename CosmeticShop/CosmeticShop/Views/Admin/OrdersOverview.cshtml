@@ -9,7 +9,7 @@
     <table class="overview__table overview__table--orders">
         <tr>
             <th>Mã đơn</th>
-            <th>Mã khách</th>
+            <th>Tên Khách hàng</th>
             <th>Ngày đặt</th>
             <th>Cập nhật</th>
             <th>Hình thức thanh toán</th>
@@ -32,12 +32,12 @@
                 case 2: paytype = "Paypal"; break;
                 case 3: paytype = "Ngân lượng"; break;
             }
-
+            string ten = item.NameLast + ' ' + item.NameMiddle + ' ' + item.NameFirst;
             <tr class=@tr_class>
                 <td><a asp-controller="Admin" asp-action="OrderCheck" asp-route-id="@item.Id">
                     @item.Id
                 </a></td>
-                <td>@item.User_Id</td>
+                <td>@ten</td>
                 <td>@item.DateCreate.ToString("dd/MM/yyyy")</td>
                 <td>@item.DateModify.ToString("dd/MM/yyyy")</td>
                 <td>@paytype</td>
