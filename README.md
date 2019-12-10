@@ -1,2 +1,0 @@
-# CosmeticShop
-Hậu Đẹp Zai
