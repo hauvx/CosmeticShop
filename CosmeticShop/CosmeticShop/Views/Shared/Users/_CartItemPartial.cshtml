@@ -55,7 +55,7 @@
                 stt++;
             }
             <tr>
-                <td class="actions" colspan="6">
+                <td class="actions" colspan="7">
 
 
                     @if (Context.Session.GetInt32("IdTaiKhoan") == null)
@@ -63,12 +63,14 @@
                         if (Context.Session.GetInt32("IdCart") != null)
                         {
                             int anocart_id = (int)Context.Session.GetInt32("IdCart");
+                            <a asp-controller="Home" asp-action="Index" class="button button--gotocheckout" style="margin-right:700px"><< TIẾP TỤC MUA HÀNG</a>
                             <a asp-controller="Checkout" asp-action="MustSignUp" class="button button--gotocheckout" asp-route-anocartid="@anocart_id">THANH TOÁN</a>
                         }
                     }
                     else
                     {
                         int userid = (int)Context.Session.GetInt32("IdTaiKhoan");
+                        <a asp-controller="Home" asp-action="Index" class="button button--gotocheckout" style="margin-right:700px"><< TIẾP TỤC MUA HÀNG</a>
                         <a asp-controller="Checkout" asp-action="AlreadySignUp" class="button button--gotocheckout" asp-route-userid="@userid">THANH TOÁN</a>
                     }
                 </td>

@@ -351,7 +351,8 @@ namespace CosmeticShop.Controllers
                                           Name = p.Name,
                                           Quantity = d.Quantity,
                                           Price = d.PriceSingle,
-                                          TotalPrice = d.PriceTotal
+                                          TotalPrice = d.PriceTotal,
+                                          TenAnh=p.Thumbnail
                                       }).ToListAsync();
                     return PartialView("Users/_CartItemPartial", cartItem);
                 }
@@ -394,7 +395,9 @@ namespace CosmeticShop.Controllers
                                                                   Name = p.Name,
                                                                   Quantity = d.Quantity,
                                                                   Price = d.PriceSingle,
-                                                                  TotalPrice = d.PriceTotal
+                                                                  TotalPrice = d.PriceTotal,
+                                                                  TenAnh=p.Thumbnail
+                                                                  
                                                               }).ToListAsync();
                     return PartialView("Users/_CartItemPartial", cartItem);
                 }
@@ -450,7 +453,8 @@ namespace CosmeticShop.Controllers
                                           Name = p.Name,
                                           Quantity = d.Quantity,
                                           Price = d.PriceSingle,
-                                          TotalPrice = d.PriceTotal
+                                          TotalPrice = d.PriceTotal,
+                                          TenAnh=p.Thumbnail
                                       }).ToListAsync();
                     return PartialView("Users/_CartItemPartial", cartItem);
                 }
@@ -501,7 +505,8 @@ namespace CosmeticShop.Controllers
                                           Name = p.Name,
                                           Quantity = d.Quantity,
                                           Price = d.PriceSingle,
-                                          TotalPrice = d.PriceTotal
+                                          TotalPrice = d.PriceTotal,
+                                          TenAnh=p.Thumbnail
                                       }).ToListAsync();
                     return PartialView("Users/_CartItemPartial", cartItem);
                 }
@@ -547,7 +552,9 @@ namespace CosmeticShop.Controllers
                                           Name = p.Name,
                                           Quantity = d.Quantity,
                                           Price = d.PriceSingle,
-                                          TotalPrice = d.PriceTotal
+                                          TotalPrice = d.PriceTotal,
+                                          TenAnh= p.Thumbnail
+                                            
                                       }).ToListAsync();
                     return PartialView("Users/_CartItemPartial", cartItem);
                 }
@@ -589,7 +596,8 @@ namespace CosmeticShop.Controllers
                                           Name = p.Name,
                                           Quantity = d.Quantity,
                                           Price = d.PriceSingle,
-                                          TotalPrice = d.PriceTotal
+                                          TotalPrice = d.PriceTotal,
+                                          TenAnh=p.Thumbnail
                                       }).ToListAsync();
                     return PartialView("Users/_CartItemPartial", cartItem);
                 }

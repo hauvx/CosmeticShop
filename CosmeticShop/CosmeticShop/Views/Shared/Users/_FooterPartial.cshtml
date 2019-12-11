@@ -24,20 +24,20 @@
                 <p><i class="fab fa-facebook"></i> Fanpage: <a href="https://www.facebook.com" target="_blank">https://www.facebook.com</a></p>
             </div>
             <div class="col-4 footer__nav">
-               
+
                 @{
                     int n = Model.ProductTypes.Count;
                     @if (n > 0)
                     {
 
-                       
-                                @for (int i = 0; i < n; i++)
-                                {
-                                    var type = Model.ProductTypes[i] as ProductType;
-                                    ViewBag.hau = type;
-                                    <a href="~/@type.URL" class="iblck">#@type.Type</a>
-                                }
-                           
+
+                        @for (int i = 0; i < n; i++)
+                        {
+                            var type = Model.ProductTypes[i] as ProductType;
+                            ViewBag.hau = type;
+                            <a href="~/@type.URL" class="iblck">#@type.Type</a>
+                        }
+
 
 
                     }
