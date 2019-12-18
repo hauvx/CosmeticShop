@@ -25,20 +25,45 @@ namespace CosmeticShop.Controllers
         [Route("products/{order_by}/{page:int?}")]
         public async Task<IActionResult> Index(string order_by, int? page)
         {
-            int p = (!page.HasValue) ? 1 : page.Value;
-            int option = getInt32ForQuery(order_by);
-            if (p <= 0 || option == -1) return NotFound();
-            ListItemProductsViewModel homeProducts = new ListItemProductsViewModel
+            if (order_by == "orderbydatecreate")
             {
-                Value = "Tất cả các sản phẩm ",
-                TotalPage = await GetTotalPage(option, ""),
-                CurrentPage = p,
-                ItemProducts = await GetProducts(option, p, ""),
-                ProductTypes = _context.ProductTypes.ToList(),
-                productBrands = _context.ProductBrands.ToList(),
-                OrderBy = order_by.ToLower()
-            };
-            return View(homeProducts);
+                int p = (!page.HasValue) ? 1 : page.Value;
+                int option = getInt32ForQuery(order_by);
+                if (p <= 0 || option == -1) return NotFound();
+                ListItemProductsViewModel homeProducts = new ListItemProductsViewModel
+                {
+                    Value = "Tất cả các sản phẩm ",
+                    TotalPage = await GetTotalPage(option, ""),
+                    CurrentPage = p,
+                    ItemProducts = await GetProducts(option, p, ""),
+                    ProductTypes = _context.ProductTypes.ToList(),
+                    productBrands = _context.ProductBrands.ToList(),
+                    OrderBy = order_by.ToLower()
+                };
+                return View(homeProducts);
+            }
+            else
+            {
+                int p = (!page.HasValue) ? 1 : page.Value;
+                // int option = getInt32ForQuery("GetListProductsFormType".ToLower());
+                if (p <= 0) return NotFound();
+                ListItemProductsViewModel homeProducts = new ListItemProductsViewModel
+                {
+                    Value = "Loại: " + order_by,
+                    CurrentPage = p,
+                    TotalPage = await GetTotalPage(4, order_by),
+                    ItemProducts = await GetProducts(4, p, order_by),
+                    ProductTypes = await _context.ProductTypes.ToListAsync(),
+                    productBrands = _context.ProductBrands.ToList(),
+                    OrderBy = order_by.ToLower()
+                };
+                var productBrand = _context.ProductBrands.FirstOrDefaultAsync(m => m.Name == order_by);
+
+                String ten = productBrand.Result.Name;
+                ViewBag.Tenpa = ten;
+                return View(homeProducts);
+            }
+           
         }
         
 
@@ -66,30 +91,7 @@ namespace CosmeticShop.Controllers
             ViewBag.TenType = ten;
             return View(viewmodel);
         }
-        [HttpGet]
-        [Route("~/Products/{pa}/{page:int?}")]
-        public async Task<IActionResult> ListProductsPa(string pa, int? page)
-        {
-            int p = (!page.HasValue) ? 1 : page.Value;
-           // int option = getInt32ForQuery("GetListProductsFormType".ToLower());
-            if (p <= 0) return NotFound();
-            ListItemProductsViewModel viewmodel = new ListItemProductsViewModel
-            {
-                Value = "Loại: " + pa,
-                CurrentPage = p,
-                TotalPage = await GetTotalPage(4, pa),
-                ItemProducts = await GetProducts(4, p, pa),
-                ProductTypes = await _context.ProductTypes.ToListAsync(),
-                productBrands = _context.ProductBrands.ToList(),
-                OrderBy = pa.ToLower()
-            };
-            var productBrand = _context.ProductBrands.FirstOrDefaultAsync(m => m.Name == pa);
-
-            String ten = productBrand.Result.Name;
-            ViewBag.Tenpa = ten;
-
-            return View(viewmodel);
-        }
+        
 
         [HttpGet]
         [Route("Search")]
@@ -145,6 +147,7 @@ namespace CosmeticShop.Controllers
                 ProductsSimilar = await GetProducts(getInt32ForQuery("GetListProductsFormType".ToLower()), 1, productType[1]),
                 ProductComments = await GetCommentById(singleProduct.Id, page),
                 ProductTypes = await _context.ProductTypes.ToListAsync(),
+                productBrands = await _context.ProductBrands.ToListAsync(),
             };
             return View(viewModel);
         }
