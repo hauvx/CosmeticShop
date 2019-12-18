@@ -12,6 +12,7 @@ namespace CosmeticShop.ViewModels
         public string OrderBy { get; set; }
         public IEnumerable<ItemProductsViewModel> ItemProducts { get; set; }
         public IEnumerable<ProductType> ProductTypes { get; set; }
+        public IEnumerable<ProductBrand> productBrands { get; set; }
 
     }
 }

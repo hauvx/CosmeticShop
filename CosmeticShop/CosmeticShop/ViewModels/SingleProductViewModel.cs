@@ -15,5 +15,6 @@ namespace CosmeticShop.ViewModels
         public IEnumerable<ItemProductsViewModel> ProductsSimilar { get; set; }
         public PerformCommentsViewModel ProductComments { get; set; }
         public IEnumerable<ProductType> ProductTypes { get; set; }
+        public IEnumerable<ProductBrand> productBrands { get; set; }
     }
 }

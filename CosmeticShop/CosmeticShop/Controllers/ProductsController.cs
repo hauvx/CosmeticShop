@@ -35,6 +35,7 @@ namespace CosmeticShop.Controllers
                 CurrentPage = p,
                 ItemProducts = await GetProducts(option, p, ""),
                 ProductTypes = _context.ProductTypes.ToList(),
+                productBrands = _context.ProductBrands.ToList(),
                 OrderBy = order_by.ToLower()
             };
             return View(homeProducts);
@@ -55,6 +56,7 @@ namespace CosmeticShop.Controllers
                 TotalPage = await GetTotalPage(option, TypeUrl),
                 ItemProducts = await GetProducts(option, p, TypeUrl),
                 ProductTypes = await _context.ProductTypes.ToListAsync(),
+                productBrands = _context.ProductBrands.ToList(),
                 OrderBy = TypeUrl.ToLower()
             };
            
@@ -64,6 +66,31 @@ namespace CosmeticShop.Controllers
             ViewBag.TenType = ten;
             return View(viewmodel);
         }
+        [HttpGet]
+        [Route("~/Products/{pa}/{page:int?}")]
+        public async Task<IActionResult> ListProductsPa(string pa, int? page)
+        {
+            int p = (!page.HasValue) ? 1 : page.Value;
+           // int option = getInt32ForQuery("GetListProductsFormType".ToLower());
+            if (p <= 0) return NotFound();
+            ListItemProductsViewModel viewmodel = new ListItemProductsViewModel
+            {
+                Value = "Loại: " + pa,
+                CurrentPage = p,
+                TotalPage = await GetTotalPage(4, pa),
+                ItemProducts = await GetProducts(4, p, pa),
+                ProductTypes = await _context.ProductTypes.ToListAsync(),
+                productBrands = _context.ProductBrands.ToList(),
+                OrderBy = pa.ToLower()
+            };
+            var productBrand = _context.ProductBrands.FirstOrDefaultAsync(m => m.Name == pa);
+
+            String ten = productBrand.Result.Name;
+            ViewBag.Tenpa = ten;
+
+            return View(viewmodel);
+        }
+
         [HttpGet]
         [Route("Search")]
         public async Task<IActionResult> SearchProducts(string key_s, int? page)
@@ -82,6 +109,7 @@ namespace CosmeticShop.Controllers
                 TotalPage = await GetTotalPage(option, key_s),
                 ItemProducts = await GetProducts(option, p, key_s),
                 ProductTypes = _context.ProductTypes.ToList(),
+                productBrands = _context.ProductBrands.ToList(),
                 OrderBy = "SearchByName".ToLower(),
             };
             return View(viewmodel);
@@ -412,6 +440,33 @@ namespace CosmeticShop.Controllers
                             on p.ProductType_Id equals t.Id
                             where t.URL == value
                             orderby p.DateCreate descending
+                            select new ItemProductsViewModel
+                            {
+                                Id = p.Id,
+                                Name = p.Name,
+                                Price = p.Price,
+                                Saleoff = p.Saleoff,
+                                Thumbnail = p.Thumbnail,
+                                Stars = p.Stars,
+                                Views = p.Views,
+                                Orders = p.Orders,
+                                NameUrl = s.Url,
+                                TypeUrl = t.URL
+                            };
+                product = await query.Skip(page * 8).Take(8).ToListAsync();
+            }
+
+            else if (option == 4)
+            {
+                var query = from
+                            pa in _context.ProductBrands join
+                            p in _context.Products on pa.Id equals p.ProductBrand_Id
+                            join s in _context.Slugs
+                            on p.Slug_Id equals s.Id
+                            join t in _context.ProductTypes
+                            on p.ProductType_Id equals t.Id
+                            where pa.Name == value
+                           // orderby p.DateCreate descending
                             select new ItemProductsViewModel
                             {
                                 Id = p.Id,

@@ -27,7 +27,9 @@ namespace CosmeticShop.Controllers
             {
                 NewProducts = GetListItemProducts(0),
                 ViewMoreProduct = GetListItemProducts(1),
-                ProductTypes = _context.ProductTypes.ToList()
+                ProductTypes = _context.ProductTypes.ToList(),
+                productBrands = _context.ProductBrands.ToList()
+                
             };
             return View(viewmodel);
         }

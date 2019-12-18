@@ -78,6 +78,7 @@ namespace CosmeticShop.Controllers
             CartViewModel vm = new CartViewModel()
             {
                 ProductTypes = _context.ProductTypes.ToList(),
+                productBrands = _context.ProductBrands.ToList(),
                 CartItemViewModels = cartItem
             };
 

@@ -10,5 +10,6 @@ namespace CosmeticShop.ViewModels
     {
         public IEnumerable<ProductType> ProductTypes { get; set; }
         public IEnumerable<CartItemViewModel> CartItemViewModels { get; set; }
+        public IEnumerable<ProductBrand> productBrands { get; set; }
     }
 }

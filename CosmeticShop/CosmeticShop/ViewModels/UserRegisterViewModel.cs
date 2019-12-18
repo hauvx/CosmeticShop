@@ -15,5 +15,6 @@ namespace CosmeticShop.ViewModels
 
         // Dành cho thanh menu 
         public IEnumerable<ProductType> ProductTypes {get;set;}
+        public IEnumerable<ProductBrand> productBrands { get; set; }
     }
 }

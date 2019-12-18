@@ -9,5 +9,6 @@ namespace CosmeticShop.ViewModels
     public class ProductTypesViewModel
     {
         public IEnumerable<ProductType> ProductTypes { get; set; }
+        public IEnumerable<ProductBrand> productBrands { get; set; }
     }
 }

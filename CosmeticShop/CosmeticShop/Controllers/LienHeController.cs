@@ -19,7 +19,8 @@ namespace CosmeticShop.Controllers
         {
             LienHe lh = new LienHe
             {
-                ProductTypes = _context.ProductTypes.ToList()
+                ProductTypes = _context.ProductTypes.ToList(),
+               productBrands = _context.ProductBrands.ToList()
             };
             return View(lh);
         }
@@ -27,7 +28,8 @@ namespace CosmeticShop.Controllers
         {
             LienHe lh = new LienHe
             {
-                ProductTypes = _context.ProductTypes.ToList()
+                ProductTypes = _context.ProductTypes.ToList(),
+                productBrands = _context.ProductBrands.ToList()
             };
             return View(lh);
         }

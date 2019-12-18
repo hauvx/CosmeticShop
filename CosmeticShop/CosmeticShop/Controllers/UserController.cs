@@ -79,7 +79,8 @@ namespace CosmeticShop.Controllers
                     User = new User(){
                         Role_Id  = 4 // Role_Id của user là 4
                     },
-                    ProductTypes = _context.ProductTypes.ToList()
+                    ProductTypes = _context.ProductTypes.ToList(),
+                    productBrands = _context.ProductBrands.ToList()
                 }
             );
         }
@@ -110,7 +111,8 @@ namespace CosmeticShop.Controllers
             return View(
                 new UserLoginViewModel()
                 {
-                    ProductTypes = _context.ProductTypes.ToList()
+                    ProductTypes = _context.ProductTypes.ToList(),
+                    productBrands = _context.ProductBrands.ToList()
                 }
             );
         }
@@ -186,7 +188,8 @@ namespace CosmeticShop.Controllers
                 {
                     Order = order,
                     OrderDetails = orderdetails,
-                    Products = products
+                    Products = products,
+                    
                 };
 
                 myorderviewmodels.Add(ovm);             
@@ -194,6 +197,7 @@ namespace CosmeticShop.Controllers
 
             vm.MyOrderViewModels = myorderviewmodels;
             vm.ProductTypes = _context.ProductTypes.ToList();
+            vm.productBrands =_context.ProductBrands.ToList();
             return View(vm);
         }
 
@@ -228,6 +232,7 @@ namespace CosmeticShop.Controllers
             
             vm.MyOrderViewModels = myorderviewmodels;
             vm.ProductTypes = _context.ProductTypes.ToList();
+            vm.productBrands = _context.ProductBrands.ToList();
             return View(vm);
         }
     }

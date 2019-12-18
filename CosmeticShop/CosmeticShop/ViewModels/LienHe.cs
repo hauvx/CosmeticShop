@@ -9,5 +9,6 @@ namespace CosmeticShop.ViewModels
     public class LienHe
     {
         public IEnumerable<ProductType> ProductTypes { get; set; }
+        public IEnumerable<ProductBrand> productBrands { get; set; }
     }
 }

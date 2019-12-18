@@ -13,5 +13,7 @@ namespace CosmeticShop.ViewModels
         public User User {get;set;}
         public int AnoCartId {get;set;}
         public IEnumerable<ProductType> ProductTypes { get; set; }
+
+        public IEnumerable<ProductBrand> productBrands { get; set; }
     }
 }
