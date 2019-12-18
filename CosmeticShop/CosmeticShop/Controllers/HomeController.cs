@@ -20,6 +20,7 @@ namespace CosmeticShop.Controllers
         }
 
         // Trang chủ
+
         public IActionResult Index()
         {
             HomeViewModel viewmodel = new HomeViewModel()
@@ -88,6 +89,14 @@ namespace CosmeticShop.Controllers
                 products = query.Skip(0).Take(8).ToList();
             }
             return products;
+        }
+        public IActionResult subri()
+        {
+            LienHe lh = new LienHe
+            {
+                ProductTypes = _context.ProductTypes.ToList()
+            };
+            return View(lh);
         }
     }
 }

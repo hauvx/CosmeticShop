@@ -80,6 +80,11 @@ namespace CosmeticShop.Controllers
                 ProductTypes = _context.ProductTypes.ToList(),
                 CartItemViewModels = cartItem
             };
+
+
+            
+
+
             HttpContext.Session.SetString("TongTien", sum.ToString());
             string Ten= HttpContext.Session.GetString("TenTaiKhoan");
             string DiaChi = HttpContext.Session.GetString("diachi");
@@ -87,6 +92,10 @@ namespace CosmeticShop.Controllers
             ViewBag.diachi = DiaChi;
             PayPalConfig payPalConfig = PayPalService.GetPayPalConfig();
             ViewBag.payPalConfig = payPalConfig;
+
+
+
+
             return View(vm);
         }
         [Route("Success")]

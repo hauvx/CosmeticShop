@@ -61,7 +61,9 @@ namespace CosmeticShop.Controllers
         public void RemoveImage(Product product)
         {
             string url = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","uploads",product.Thumbnail);
-            if (System.IO.File.Exists(url)){System.IO.File.Delete(url);}
+            if (System.IO.File.Exists(url)){
+                System.IO.File.Delete(url);
+            }
         }
         // Xóa ảnh khỏi thư mục uploads theo tên ảnh
         public void RemoveImage(string image)

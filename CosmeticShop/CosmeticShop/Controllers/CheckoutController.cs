@@ -9,7 +9,7 @@ using CosmeticShop.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using CosmeticShop.ModelsPayPal;
-
+using Microsoft.AspNetCore.Hosting.Server;
 namespace CosmeticShop.Controllers
 {
     public class CheckoutController : Controller
@@ -211,6 +211,8 @@ namespace CosmeticShop.Controllers
                     _context.SaveChanges();
                 }
             }
+
+          //  String content = System.IO.File.ReadAllText(Server.MapPahth("~/template/neworder.html"));
             
             ClearCart(cart.Id);
             HttpContext.Session.SetInt32("OrderId",orderid);
