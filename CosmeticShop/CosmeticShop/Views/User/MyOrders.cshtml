@@ -14,8 +14,8 @@
                 @if (vm.Order.OrderStatus_Id != 4)
                 {
                     string status = "Đang chờ xử lý";
-                    if (vm.Order.OrderStatus_Id == 2) {status = "Đang lấy hàng";}
-                    else if (vm.Order.OrderStatus_Id == 3) {status = "Đang vận chuyển";}
+                    if (vm.Order.OrderStatus_Id == 2) { status = "Đang lấy hàng"; }
+                    else if (vm.Order.OrderStatus_Id == 3) { status = "Đang vận chuyển"; }
                     <a asp-controller="User" asp-action="MyOrderDetail" asp-route-user_id="@user_id" asp-route-order_id="@vm.Order.Id" class="blck vm_order">
                         <p class="vm_order__id">Mã đơn hàng: @vm.Order.Id</p>
                         <p class="vm_order__status">
@@ -23,13 +23,13 @@
                         </p>
                         <p class="vm_order__p">Ngày đặt hàng: @vm.Order.DateCreate.ToString("dd/MM/yyyy hh:mm")</p>
                         <p class="vm_order__p">Tổng cộng: @String.Format("{0:0,0 VNĐ}", vm.Order.TotalPrice)</p>
-                     </a>
+                    </a>
                 }
             }
         </div>
         <div class="col-8">
-        
+
         </div>
-    </div>    
+    </div>
 </div>
 

@@ -2,6 +2,9 @@
     Layout = "~/Views/Shared/Users/_IndexLayout.cshtml";
     ViewBag.Title = "CosmeticShop - Chuyên trang mua bán mỹ phẩm và làm đẹp";
 }
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+
 <div class="promo-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
@@ -34,14 +37,14 @@
     </div>
 </div> <!-- End promo area -->
 
-<div class="container-fluid section">
+<div class="container-fluid section section--hau">
     <!-- Sản phẩm mới -->
     <!-- Hau-->
     <!-- Hau-->
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="section__title" style="text-align:center">SẢN PHẨM MỚI</h1>
+                <h1 class="section__title center" style="text-align:center; color:red" >SẢN PHẨM MỚI</h1>
                 <div class="product-carousel">
 
                     <div class="row">
@@ -97,7 +100,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="section__title">MUA NHIỀU XEM NHIỀU</h1>
+                <h1 class="section__title " style="text-align:center; color:red">MUA NHIỀU XEM NHIỀU</h1>
                 <div class="product-carousel">
                     <div class="row">
                         @foreach (var item in Model.ViewMoreProduct)
@@ -150,7 +153,7 @@
             <div class="col-5 register__benefits">
                 <p>Từ ngày <span class="benefits__date">02/10/2019</span>, quý khách hàng khi đăng ký trở thành thành viên của <span class="benefits__date">Cosmetic</span> sẽ nhận được các chương trình ưu đãi và khuyến mãi hấp dẫn:</p>
                 <p>- Mua sắm trực tuyến <span class="benefits__nolimit">KHÔNG GIỚI HẠN</span> số lượng sản phẩm.</p>
-                <p>- Miễn trừ phí vận chuyển lên đến <span class="benefits__fee">35,000 VNĐ</span>.</p>
+                <p>- Miễn trừ phí vận chuyển lên đến <span class="benefits__fee">99,000 VNĐ</span>.</p>
                 <p>- Nhận thông báo về thông tin đơn hàng qua email và số điện thoại.</p>
                 <p>Hãy nhanh tay đăng ký trở thành thành viên của K42Shop ngay hôm nay !</p>
                 <a asp-controller="User" asp-action="Login">Đăng ký ngay bây giờ</a>
@@ -160,12 +163,12 @@
                 <!-- Begin Mailchimp Signup Form -->
                 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
                 <style type="text/css">
-                                 #mc_embed_signup {
-                                     background: #fff;
-                                     clear: left;
-                                     font: 14px Helvetica,Arial,sans-serif;
-                                 }
-                                 /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                    #mc_embed_signup {
+                        background: #fff;
+                        clear: left;
+                        font: 14px Helvetica,Arial,sans-serif;
+                    }
+                    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
                     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
                 </style>
                 <div id="mc_embed_signup">
@@ -199,8 +202,8 @@
                                 <div class="response" id="mce-success-response" style="display:none"></div>
                             </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                             <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3f8bbc543b575a445f544f815_2d915e7993" tabindex="-1" value=""></div>
-                            <div class="clear"><button type="submit" name="subscribe" id="mc-embedded-subscribe">Đăng ký nhận thông báo</button></div>
-                            
+                            <div class="clear" ><button type="submit" name="subscribe" id="mc-embedded-subscribe" style="background:red">Đăng ký nhận thông báo</button></div>
+
                         </div>
                     </form>
                 </div>
@@ -212,4 +215,13 @@
         </div><!-- end of col -->
     </div><!-- end of row -->
 </div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154770721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-154770721-1');
+</script>
 

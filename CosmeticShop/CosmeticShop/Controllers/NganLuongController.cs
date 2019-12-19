@@ -61,8 +61,8 @@ namespace CosmeticShop.Controllers
             info.fee_shipping = "0";
             info.Discount_amount = giamGia.ToString();
             info.order_description = "Thanh toan test thu dong hang";
-            info.return_url = "http://web42shop10.somee.com/Checkout/NganLuongPaid/?orderid="+HttpContext.Session.GetInt32("OrderId").ToString();
-            info.cancel_url = "http://calhost:44138";
+            info.return_url = "https://cosmeticshop.azurewebsites.net/Checkout/NganLuongPaid/?orderid=" + HttpContext.Session.GetInt32("OrderId").ToString();
+            info.cancel_url = "https://cosmeticshop.azurewebsites.net/";
 
             info.Buyer_fullname = buyer_fullname;
             info.Buyer_email = buyer_email;

@@ -4,16 +4,68 @@
     Layout = "~/Views/Shared/Users/_IndexLayout.cshtml";
     ViewBag.SearchFlag = "Sản phẩm mới";
 }
+<style>
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+    }
 
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
 
 <div class="container-fluid section">
     <!-- Sản phẩm mới -->
     <div class="container">
         <h1 class="section__title">Kết quả tìm kiếm: </h1><h3 class="iblck" style="margin-left: 1rem">Tất cả các sản phẩm </h3>
+
+                                                          <div class="dropdown">
+                                                              <button class="dropbtn">Sắp Xếp</button>
+                                                              <div class="dropdown-content">
+                                                                  <a href="~/products/ascending">Giá từ thấp tới cao</a>
+                                                                  <a href="~/products/descending">Giá từ cao xuống thấp</a>
+                                                                  
+                                                              </div>
+                                                          </div>
+
         <div class="row">
+
             @foreach (var item in Model.ItemProducts)
             {
-            <div class="col-3 product">
+                <div class="col-3 product">
                     <div class="single-product">
                         @if (item.Saleoff != 0)
                         {
@@ -35,7 +87,7 @@
                         </div>
 
                         <div class="product__info ">
-                            <a href="~/@item.TypeUrl/@item.NameUrl" class="mrg0 product__name">@item.Name</a>
+                            <a href="~/@item.TypeUrl/@item.NameUrl" class="mrg0 product__name" style="color:red">@item.Name</a>
                             @if (item.Saleoff != 0)
                             {
                                 <p class="mrg0 product__oldprice">@String.Format("{0:0,0 VNĐ}", item.Price) </p>
@@ -45,9 +97,9 @@
                             {
                                 <p class="mrg0 product__newprice">@String.Format("{0:0,0 VNĐ}", item.Price)</p>
                             }
-                                
-                            
-                               
+
+
+
                         </div>
                     </div>
                 </div>

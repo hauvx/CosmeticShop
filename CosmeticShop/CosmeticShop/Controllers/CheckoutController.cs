@@ -14,6 +14,7 @@ namespace CosmeticShop.Controllers
 {
     public class CheckoutController : Controller
     {
+        List<Product> products = new List<Product>();
         private CosmeticShopDbContext _context;
         public CheckoutController(CosmeticShopDbContext context)
         {
@@ -48,7 +49,8 @@ namespace CosmeticShop.Controllers
             {
                 OrderDetails =  orderdetails,
                 Products     = products,
-                ProductTypes = _context.ProductTypes.ToList()
+                ProductTypes = _context.ProductTypes.ToList(),
+                productBrands = _context.ProductBrands.ToList()
             };
 
             int sum = 0;
@@ -57,7 +59,7 @@ namespace CosmeticShop.Controllers
 
             PayPalConfig payPalConfig = PayPalService.GetPayPalConfig();
             ViewBag.payPalConfig = payPalConfig;
-
+           
             return View(vm);
         }
 
@@ -68,7 +70,8 @@ namespace CosmeticShop.Controllers
             {
                 User = new User(){ Role_Id = 4},
                 AnoCartId = anocartid,
-                ProductTypes = _context.ProductTypes.ToList()
+                ProductTypes = _context.ProductTypes.ToList(),
+                productBrands = _context.ProductBrands.ToList()
             };
 
             return View(vm);
@@ -126,7 +129,8 @@ namespace CosmeticShop.Controllers
                     {
                         User = vm.User,
                         AnoCartId = vm.AnoCartId,
-                        ProductTypes = _context.ProductTypes.ToList()
+                        ProductTypes = _context.ProductTypes.ToList(),
+                        productBrands = _context.ProductBrands.ToList()
                     }
                 );
             }
@@ -277,6 +281,7 @@ namespace CosmeticShop.Controllers
             order.PayStatus_Id = 2; // Đã thanh toán
             order.PayType_Id   = 2; // Loại thanh toán PayPal
             _context.SaveChanges();
+         
             HttpContext.Session.SetString("PayStatus","paid");
             return RedirectToAction("Index","Home");
         }
@@ -288,12 +293,15 @@ namespace CosmeticShop.Controllers
             order.PayStatus_Id = 2; // Đã thanh toán
             order.PayType_Id   = 3; // Loại thanh toán Ngân lượng
             _context.SaveChanges();
+           
             HttpContext.Session.SetString("PayStatus","paid");
             return RedirectToAction("Index","Home");
         }
 
         public IActionResult PayAfter()
         {
+            
+          
             HttpContext.Session.SetString("PayStatus","paid");
             return RedirectToAction("Index","Home");
         }

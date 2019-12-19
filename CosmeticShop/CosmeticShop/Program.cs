@@ -14,6 +14,8 @@ namespace CosmeticShop
     {
         public static void Main(string[] args)
         {
+
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

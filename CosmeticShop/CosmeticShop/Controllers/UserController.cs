@@ -100,7 +100,8 @@ namespace CosmeticShop.Controllers
                     new UserRegisterViewModel()
                     {
                         User = vm.User,
-                        ProductTypes = _context.ProductTypes.ToList()
+                        ProductTypes = _context.ProductTypes.ToList(),
+                        productBrands = _context.ProductBrands.ToList()
                     }
                 );
             }
@@ -151,7 +152,8 @@ namespace CosmeticShop.Controllers
                 {
                     Username = vm.Username,
                     Password = vm.Password,
-                    ProductTypes = _context.ProductTypes.ToList()
+                    ProductTypes = _context.ProductTypes.ToList(),
+                    productBrands = _context.ProductBrands.ToList()
                 }
             );
         }

@@ -42,6 +42,40 @@ namespace CosmeticShop.Controllers
                 };
                 return View(homeProducts);
             }
+            else if (order_by == "descending")
+            {
+                int p = (!page.HasValue) ? 1 : page.Value;
+                int option = getInt32ForQuery(order_by);
+                if (p <= 0 || option == -1) return NotFound();
+                ListItemProductsViewModel homeProducts = new ListItemProductsViewModel
+                {
+                    Value = "Tất cả các sản phẩm ",
+                    TotalPage = await GetTotalPage(option, ""),
+                    CurrentPage = p,
+                    ItemProducts = await GetProducts(option, p, ""),
+                    ProductTypes = _context.ProductTypes.ToList(),
+                    productBrands = _context.ProductBrands.ToList(),
+                    OrderBy = order_by.ToLower()
+                };
+                return View(homeProducts);
+            }
+            else if (order_by == "ascending")
+            {
+                int p = (!page.HasValue) ? 1 : page.Value;
+                int option = getInt32ForQuery(order_by);
+                if (p <= 0 || option == -1) return NotFound();
+                ListItemProductsViewModel homeProducts = new ListItemProductsViewModel
+                {
+                    Value = "Tất cả các sản phẩm ",
+                    TotalPage = await GetTotalPage(5, ""),
+                    CurrentPage = p,
+                    ItemProducts = await GetProducts(option, p, ""),
+                    ProductTypes = _context.ProductTypes.ToList(),
+                    productBrands = _context.ProductBrands.ToList(),
+                    OrderBy = order_by.ToLower()
+                };
+                return View(homeProducts);
+            }
             else
             {
                 int p = (!page.HasValue) ? 1 : page.Value;
@@ -296,6 +330,16 @@ namespace CosmeticShop.Controllers
                 total = (sl % 8 == 0) ? (sl / 8) : (sl / 8) + 1;
                 return total;
             }
+            else if (option == 5)
+            {
+                int sl = await (from p in _context.Products
+                                join t in _context.ProductTypes
+                                on p.ProductType_Id equals t.Id
+                                
+                                select p).CountAsync();
+                total = (sl % 8 == 0) ? (sl / 8) : (sl / 8) + 1;
+                return total;
+            }
             return 0;
         }
 
@@ -485,6 +529,52 @@ namespace CosmeticShop.Controllers
                             };
                 product = await query.Skip(page * 8).Take(8).ToListAsync();
             }
+            else if (option == 5)
+            {
+                var query = (from p in _context.Products
+                             join s in _context.Slugs
+                             on p.Slug_Id equals s.Id
+                             join t in _context.ProductTypes
+                             on p.ProductType_Id equals t.Id
+                             orderby p.Price -( p.Price*p.Saleoff)/100 descending
+                             select new ItemProductsViewModel
+                             {
+                                 Id = p.Id,
+                                 Name = p.Name,
+                                 Price = p.Price,
+                                 Saleoff = p.Saleoff,
+                                 Thumbnail = p.Thumbnail,
+                                 Stars = p.Stars,
+                                 Views = p.Views,
+                                 Orders = p.Orders,
+                                 NameUrl = s.Url,
+                                 TypeUrl = t.URL
+                             });
+                product = await query.Skip(page * 8).Take(8).ToListAsync();
+            }
+            else if (option == 6)
+            {
+                var query = (from p in _context.Products
+                             join s in _context.Slugs
+                             on p.Slug_Id equals s.Id
+                             join t in _context.ProductTypes
+                             on p.ProductType_Id equals t.Id
+                             orderby p.Price - (p.Price * p.Saleoff) / 100 ascending
+                             select new ItemProductsViewModel
+                             {
+                                 Id = p.Id,
+                                 Name = p.Name,
+                                 Price = p.Price,
+                                 Saleoff = p.Saleoff,
+                                 Thumbnail = p.Thumbnail,
+                                 Stars = p.Stars,
+                                 Views = p.Views,
+                                 Orders = p.Orders,
+                                 NameUrl = s.Url,
+                                 TypeUrl = t.URL
+                             });
+                product = await query.Skip(page * 8).Take(8).ToListAsync();
+            }
             return product;
         }
         private int getInt32ForQuery(string value)
@@ -504,6 +594,14 @@ namespace CosmeticShop.Controllers
             else if( value == "GetListProductsFormType".ToLower())
             {
                 return 3;
+            }
+            else if (value == "descending".ToLower())
+            {
+                return 5;
+            }
+            else if (value == "ascending".ToLower())
+            {
+                return 6;
             }
             return -1;
         }
