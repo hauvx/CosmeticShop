@@ -50,16 +50,24 @@
 <div class="container-fluid section">
     <!-- Sản phẩm mới -->
     <div class="container">
-        <h1 class="section__title">Kết quả tìm kiếm: </h1><h3 class="iblck" style="margin-left: 1rem">Tất cả các sản phẩm </h3>
+        <h1 class="section__title">Kết quả tìm kiếm: </h1><h3 class="iblck" style="margin-left: 1rem">
+            Tất cả các sản phẩm:
+            @if (ViewBag.Tenpa != null)
+            {
+                @ViewBag.Tenpa
+            }
+        </h3>
 
-                                                          <div class="dropdown">
-                                                              <button class="dropbtn">Sắp Xếp</button>
-                                                              <div class="dropdown-content">
-                                                                  <a href="~/products/ascending">Giá từ thấp tới cao</a>
-                                                                  <a href="~/products/descending">Giá từ cao xuống thấp</a>
-                                                                  
-                                                              </div>
-                                                          </div>
+        @if (ViewBag.Tenpa ==null)
+        {<div class="dropdown">
+                <button class="dropbtn">Sắp Xếp</button>
+                <div class="dropdown-content">
+                    <a href="~/products/ascending">Giá từ thấp tới cao</a>
+                    <a href="~/products/descending">Giá từ cao xuống thấp</a>
+
+                </div>
+            </div>
+        }
 
         <div class="row">
 

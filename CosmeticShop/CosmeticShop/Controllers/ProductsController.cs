@@ -42,6 +42,23 @@ namespace CosmeticShop.Controllers
                 };
                 return View(homeProducts);
             }
+            else if (order_by == "orderbyordersviews")
+            {
+                int p = (!page.HasValue) ? 1 : page.Value;
+                int option = getInt32ForQuery(order_by);
+                if (p <= 0 || option == -1) return NotFound();
+                ListItemProductsViewModel homeProducts = new ListItemProductsViewModel
+                {
+                    Value = "Tất cả các sản phẩm ",
+                    TotalPage = await GetTotalPage(option, ""),
+                    CurrentPage = p,
+                    ItemProducts = await GetProducts(option, p, ""),
+                    ProductTypes = _context.ProductTypes.ToList(),
+                    productBrands = _context.ProductBrands.ToList(),
+                    OrderBy = order_by.ToLower()
+                };
+                return View(homeProducts);
+            }
             else if (order_by == "descending")
             {
                 int p = (!page.HasValue) ? 1 : page.Value;
@@ -461,7 +478,7 @@ namespace CosmeticShop.Controllers
                             on p.Slug_Id equals s.Id
                             join t in _context.ProductTypes
                             on p.ProductType_Id equals t.Id
-                            where p.Name.ToLower().Contains(value.ToLower().Trim())
+                            where p.Name.ToUrlFriendly().Contains(value.ToUrlFriendly().Trim())
                             orderby p.DateCreate descending
                             select new ItemProductsViewModel
                             {

@@ -179,6 +179,96 @@ namespace CosmeticShop.Controllers
             }
             else {return RedirectToAction("Login");}
         }
+
+
+        [HttpGet]
+        [Route("SearchProductAdmin")]
+        public async Task<IActionResult> SearchProAdmin(string key_s, int? page)
+        {
+            if (key_s == null)
+            {
+                return Redirect("~/Admin/ProductsOverview");
+            }
+            else
+            {
+                AdminProductsViewModel vm = new AdminProductsViewModel()
+                {
+                    Products = _context.Products.Where(p => p.Name.ToUrlFriendly().Contains(key_s.ToUrlFriendly().Trim())).ToList()
+                };
+                return View(vm);
+            }
+         
+
+        }
+
+        [HttpGet]
+        [Route("SearchProductBarndAdmin")]
+        public async Task<IActionResult> SearchProductBarndAdmin(string key_s, int? page)
+        {
+            if (key_s == null)
+            {
+                return Redirect("~/Admin/ProductBrandsOverview");
+            }
+            else
+            {
+                AdminProductBrandsViewModel vm = new AdminProductBrandsViewModel()
+                {
+                    ProductBrand = new ProductBrand() { Admin_Id = (int)HttpContext.Session.GetInt32("Admin_Id") },
+                    ProductBrands = _context.ProductBrands.Where(p => p.Name.ToUrlFriendly().Contains(key_s.ToUrlFriendly().Trim())).ToList(),
+                    Products = _context.Products.ToList()
+                };
+                return View(vm);
+            }
+
+
+        }
+
+        [HttpGet]
+        [Route("SearchUsersOverview")]
+        public async Task<IActionResult> SearchUsersOverview(string key_s, int? page)
+        {
+            if (key_s == null)
+            {
+                return Redirect("~/Admin/UsersOverview");
+            }
+            else
+            {
+               
+                   
+                  
+                return View(_context.Users.Where(p => (p.NameFirst +p.NameMiddle+p.NameLast).ToUrlFriendly().Contains(key_s.ToUrlFriendly().Trim()))   );
+            }
+
+
+        }
+        // tim user
+        [HttpGet]
+        [Route("SearchProductTypeAdmin")]
+        public async Task<IActionResult> SearchProductTypeAdmin(string key_s, int? page)
+        {
+            if (key_s == null)
+            {
+                return Redirect("~/Admin/ProductTypesOverview");
+            }
+            else
+            {
+                AdminProductTypesViewModel vm = new AdminProductTypesViewModel()
+                {
+                    ProductType = new ProductType()
+                    {
+                        URL = "Chưa có đường dẫn url",
+                        Admin_Id = (int)HttpContext.Session.GetInt32("Admin_Id")
+                    },
+                    ProductTypes = _context.ProductTypes.OrderBy(p => p.Type).ToList(),
+                    Products = _context.Products.ToList(),
+                    productBrands = _context.ProductBrands.ToList()
+                };
+                return View(vm);
+               
+            }
+
+
+        }
         public IActionResult ProductNew()
         {
             if (IsLogedIn() == true)
@@ -511,7 +601,8 @@ namespace CosmeticShop.Controllers
                         Admin_Id = (int)HttpContext.Session.GetInt32("Admin_Id")
                     },
                     ProductTypes = _context.ProductTypes.OrderBy(p => p.Type).ToList(),
-                    Products     = _context.Products.ToList()
+                    Products     = _context.Products.ToList(),
+                    productBrands = _context.ProductBrands.ToList()
                 };
                 return View(vm);
             }
