@@ -143,6 +143,7 @@ namespace CosmeticShop.Controllers
             else 
             if (Auth.Role_Id <= 3) 
             {
+                HttpContext.Session.SetString("Name", Auth.Username);
                 HttpContext.Session.SetInt32("Role_Id", Auth.Role_Id);
                 HttpContext.Session.SetInt32("Admin_Id", Auth.Id);
                 return RedirectToAction("Index", "Admin");

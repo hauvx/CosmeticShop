@@ -2,6 +2,7 @@
     ViewData["Title"] = "Trình quản lý website Cosmetic";
     Layout = "~/Views/Admin/_AdminIndexLayout.cshtml";
 }
+@using Microsoft.AspNetCore.Http;
 
 <div class="container-fluid index">
     <table>
@@ -14,8 +15,8 @@
             <td>
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header glow" style="font-family: cursive;">
-                            Xin chào đến trang admin
+                        <h1 class="page-header glow" style="font-family: cursive; text-align:center">
+                            Xin chào <b>@Context.Session.GetString("Name")</b> đến trang admin  
 
                         </h1>
                     </div>
