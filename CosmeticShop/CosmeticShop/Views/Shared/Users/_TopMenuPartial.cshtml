@@ -1,5 +1,6 @@
 ﻿@using CosmeticShop.Models;
 @using Microsoft.AspNetCore.Http;
+@using CosmeticShop.Controllers;
 <div class="container-fluid topmenu sticky">
     <div class="container txt-left">
 
@@ -17,7 +18,7 @@
                         {
                             var type = Model.productBrands[i] as ProductBrand;
                             ViewBag.hau = type;
-                            <a href="~/Products/@type.Name" class="topmenu__href">@type.Name</a>
+                            <a href="~/Products/@type.Name.ToUrlFriendly()" class="topmenu__href">@type.Name</a>
                         }
                     </div>
 

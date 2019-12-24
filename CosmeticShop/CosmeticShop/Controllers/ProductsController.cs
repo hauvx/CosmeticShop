@@ -108,7 +108,7 @@ namespace CosmeticShop.Controllers
                     productBrands = _context.ProductBrands.ToList(),
                     OrderBy = order_by.ToLower()
                 };
-                var productBrand = _context.ProductBrands.FirstOrDefaultAsync(m => m.Name == order_by);
+                var productBrand = _context.ProductBrands.FirstOrDefaultAsync(m => m.Name.ToUrlFriendly() == order_by);
 
                 String ten = productBrand.Result.Name;
                 ViewBag.Tenpa = ten;
@@ -403,7 +403,7 @@ namespace CosmeticShop.Controllers
                         orderby c.DateCreate descending
                         select new CommentsViewModel {
                             Id = c.Id,
-                            User = u.NameFirst + u.NameMiddle + u.NameLast,
+                            User = u.NameLast +" "+ u.NameMiddle + " " + u.NameFirst,
                             Product_Id = c.Product_Id,
                             Stars = c.Stars,
                             Content = c.Content,
@@ -529,8 +529,8 @@ namespace CosmeticShop.Controllers
                             on p.Slug_Id equals s.Id
                             join t in _context.ProductTypes
                             on p.ProductType_Id equals t.Id
-                            where pa.Name == value
-                           // orderby p.DateCreate descending
+                            where pa.Name.ToUrlFriendly() == value.ToUrlFriendly()
+                            // orderby p.DateCreate descending
                             select new ItemProductsViewModel
                             {
                                 Id = p.Id,
