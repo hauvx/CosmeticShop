@@ -76,7 +76,7 @@ namespace CosmeticShop.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Ngày chỉnh sửa cuối")]
         public DateTime DateModify { get; set; }
-
+       
         // Phần này dành cho khóa ngoại
         #region Foreign Keys
         public ICollection<Comment> Comments { get; set; }

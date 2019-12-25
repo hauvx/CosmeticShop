@@ -15,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CosmeticShop.Helper;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace CosmeticShop.Controllers
 {
@@ -92,11 +94,24 @@ namespace CosmeticShop.Controllers
             
             if (ModelState.IsValid)
             {
+
                 _context.Users.Add(vm.User);
                 _context.SaveChanges();
                 string content = "Chúc Mừng: " + vm.User.NameLast + " " + vm.User.NameMiddle + " " + vm.User.NameFirst;
-                content += "<br>Đẵ Đăng Kí Thành Công  ";
-                content += "<br>Click vô đây xác nhận đăng nhập: https://cosmeticshop20.azurewebsites.net/User/Login";
+                content += "<br>Đã Đăng Kí Thành Công  ";
+               
+                // content += "<br>Click vô đây xác nhận đăng nhập: https://cosmeticshop20.azurewebsites.net/User/Login";
+                content += "Click vào <a href='https://cosmeticshop20.azurewebsites.net/activate/activate'>link</a> này để kích hoạt tài khoản.";
+                const string accountSid = "ACff7a2b137de5ac0d7fe4d1396756abe9";
+                const string authToken = "4d8822f20cfb83f5e8d6f3f16b18c6de";
+
+                TwilioClient.Init(accountSid, authToken);
+
+                var message = MessageResource.Create(
+                    body: vm.User.NameLast + " " + vm.User.NameMiddle + " " + vm.User.NameFirst + " Đã đăng kí tài khoản",
+                    from: new Twilio.Types.PhoneNumber("+12028581210"),
+                    to: new Twilio.Types.PhoneNumber("+84867601320")
+                );
                 //bool a = MailHelper.Send(vm.User.Email, vm.User.Email, "Chúc Mừng Bạn Đã Đăng Kí Thành Công", content);
                 if (MailHelper.Send(vm.User.Email, vm.User.Email, "Chúc Mừng Bạn Đã Đăng Kí Thành Công", content))
                 {
@@ -106,7 +121,7 @@ namespace CosmeticShop.Controllers
                 {
                     ViewBag.msg = "Fail";
                 }
-
+                HttpContext.Session.Set("kh", vm.User);
                 return RedirectToAction("Login");
             }
             else
@@ -126,6 +141,7 @@ namespace CosmeticShop.Controllers
 
         public IActionResult Login()
         {
+           
             return View(
                 new UserLoginViewModel()
                 {
@@ -138,6 +154,7 @@ namespace CosmeticShop.Controllers
         [HttpPost]
         public IActionResult Login(UserLoginViewModel vm)
         {
+            ViewBag.hau = "hauahu";
             if (ModelState.IsValid)
             {
                 string u = vm.Username;
@@ -145,22 +162,47 @@ namespace CosmeticShop.Controllers
 
                 if (EmailLogin(u,p) == true || PhoneNumberLogin(u,p) == true)
                 {
-                    User data = _context.Users.Where(us => us.Email == u).FirstOrDefault();
-                    if (data == null) { data =  _context.Users.Where(us => us.PhoneNumber == u).FirstOrDefault();}
+                    HttpContext.Session.Remove("check");
+                    //int check = -1;
+                    User abc = _context.Users.Where(us => us.Email == u).FirstOrDefault();
+                    if (abc == null ) {
+                        abc =_context.Users.Where(us => us.PhoneNumber == u).FirstOrDefault();
+                    }
+                     if(abc.BuyPoints > 0)
+                    {
+                        User data = _context.Users.Where(us => us.Email == u).FirstOrDefault();
+                        if (data == null) { data = _context.Users.Where(us => us.PhoneNumber == u).FirstOrDefault(); }
 
-                    string displayname = data.NameLast;
-                    if (data.NameMiddle != null) { displayname += " " + data.NameMiddle + " ";}
-                    displayname += " " + data.NameFirst;
+                        string displayname = data.NameLast;
+                        if (data.NameMiddle != null) { displayname += " " + data.NameMiddle + " "; }
+                        displayname += " " + data.NameFirst;
 
-                    int id = data.Id;
+                        int id = data.Id;
 
-                    string diachi = data.AddressStreet+ " , "+ data.AddressDistrict + " , " +data.AddressApartment + " , " +data.AddressCity;
+                        string diachi = data.AddressStreet + " , " + data.AddressDistrict + " , " + data.AddressApartment + " , " + data.AddressCity;
 
-                    HttpContext.Session.SetInt32("IdTaiKhoan",id);
-                    HttpContext.Session.SetString("TenTaiKhoan",displayname);
-                    HttpContext.Session.SetString("diachi", diachi);
+                        HttpContext.Session.SetInt32("IdTaiKhoan", id);
+                        HttpContext.Session.SetString("TenTaiKhoan", displayname);
+                        HttpContext.Session.SetString("diachi", diachi);
+                        HttpContext.Session.SetString("email", abc.Email);
+                        return RedirectToAction("Index", "Home");
+                    }
+                     else
+                    {
+                        HttpContext.Session.SetString("check", " Tài khoản bạn chưa được kích hoạt, vui lòng kiểm tra mail để kích hoạt tài khoản.");
+                        ViewBag.mess = " Tài khoản bạn chưa được kích hoạt, vui lòng kiểm tra mail để kích hoạt tài khoản";
+                        ModelState.AddModelError("Lỗi", " Tài khoản bạn chưa được kích hoạt, vui lòng kiểm tra mail để kích hoạt tài khoản");
+                        return  RedirectToAction("Login");
+                    }
+                }
 
-                    return RedirectToAction("Index","Home");
+                else
+                {
+                    HttpContext.Session.SetString("check", "Tên đăng nhập hoặc mật khẩu không hợp lệ.");
+
+                    ViewBag.mess = "Tên đăng nhập hoặc mật khẩu không hợp lệ.";
+                    ModelState.AddModelError("Lỗi", "Tên đăng nhập hoặc mật khẩu không hợp lệ.");
+                    return RedirectToAction("Login");
                 }
             }
             
@@ -179,7 +221,8 @@ namespace CosmeticShop.Controllers
         {
             if (IsLogedIn() == true)
             {
-                HttpContext.Session.Remove("IdTaiKhoan");
+                HttpContext.Session.Remove("check");
+               HttpContext.Session.Remove("IdTaiKhoan");
                 HttpContext.Session.Remove("TenTaiKhoan");
             }
             return RedirectToAction("Login");

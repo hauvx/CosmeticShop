@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Twilio" Version="5.37.1" />
   </ItemGroup>
 
   <ItemGroup>

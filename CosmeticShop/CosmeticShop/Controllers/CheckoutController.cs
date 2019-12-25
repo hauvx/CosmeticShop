@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using CosmeticShop.ModelsPayPal;
 using Microsoft.AspNetCore.Hosting.Server;
+using CosmeticShop.Helper;
+
 namespace CosmeticShop.Controllers
 {
     public class CheckoutController : Controller
@@ -54,7 +56,11 @@ namespace CosmeticShop.Controllers
             };
 
             int sum = 0;
-            foreach (var detail in vm.OrderDetails){ sum += detail.PriceTotal;}
+           
+            foreach (var detail in vm.OrderDetails){
+                sum += detail.PriceTotal;
+               
+            }
             HttpContext.Session.SetString("TongTien", sum.ToString());
 
             PayPalConfig payPalConfig = PayPalService.GetPayPalConfig();
@@ -281,7 +287,18 @@ namespace CosmeticShop.Controllers
             order.PayStatus_Id = 2; // Đã thanh toán
             order.PayType_Id   = 2; // Loại thanh toán PayPal
             _context.SaveChanges();
-         
+            string email = HttpContext.Session.GetString("email");
+
+            string content = "<br>Bạn đã đặt đơn hàng thành công. Tổng tiền :" + HttpContext.Session.GetString("TongTien");
+            if (MailHelper.Send(email, email, "Đơn Hàng", content))
+            {
+                ViewBag.msg = "Success";
+            }
+            else
+            {
+                ViewBag.msg = "Fail";
+            }
+            HttpContext.Session.Remove("TongTien");
             HttpContext.Session.SetString("PayStatus","paid");
             return RedirectToAction("Index","Home");
         }
@@ -293,15 +310,37 @@ namespace CosmeticShop.Controllers
             order.PayStatus_Id = 2; // Đã thanh toán
             order.PayType_Id   = 3; // Loại thanh toán Ngân lượng
             _context.SaveChanges();
-           
+
+            string email = HttpContext.Session.GetString("email");
+
+            string content = "<br>Bạn đã đặt đơn hàng thành công. Tổng tiền :" + HttpContext.Session.GetString("TongTien");
+            if (MailHelper.Send(email, email, "Đơn Hàng", content))
+            {
+                ViewBag.msg = "Success";
+            }
+            else
+            {
+                ViewBag.msg = "Fail";
+            }
+            HttpContext.Session.Remove("TongTien");
             HttpContext.Session.SetString("PayStatus","paid");
             return RedirectToAction("Index","Home");
         }
 
         public IActionResult PayAfter()
         {
-            
-          
+            string email = HttpContext.Session.GetString("email");
+
+            string content = "<br>Bạn đã đặt đơn hàng thành công. Tổng tiền :" + HttpContext.Session.GetString("TongTien");
+            if (MailHelper.Send(email, email, "Đơn Hàng", content))
+            {
+                ViewBag.msg = "Success";
+            }
+            else
+            {
+                ViewBag.msg = "Fail";
+            }
+            HttpContext.Session.Remove("TongTien");
             HttpContext.Session.SetString("PayStatus","paid");
             return RedirectToAction("Index","Home");
         }

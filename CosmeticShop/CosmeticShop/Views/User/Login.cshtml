@@ -7,12 +7,17 @@
 
 <div class="container-fluid section">
     <div class="container">
+
+        <h1 style="text-align:center; color:red">@Context.Session.GetString("check")</h1>
         <div class="row">
             <div class="col"></div>
             <div class="col">
                 <br />
                 <br />
+
                 <form class="login_form" asp-controller="User" asp-action="Login" method="post">
+
+
                     <div class="form-group">
                         <label asp-for="@Model.Username">Email hoặc số điện thoại</label>
                         <input type="text" class="form-control" asp-for="@Model.Username">
@@ -23,15 +28,15 @@
                         <input type="password" class="form-control" asp-for="@Model.Password">
                         <span asp-validation-for="@Model.Password" class="text-danger"></span>
                     </div>
-                    
+
                     <br />
                     <div class="form-row">
                         <div class="col">
-                            <button type="submit" class="button button--submit" >Đăng nhập</button>
+                            <button type="submit" class="button button--submit">Đăng nhập</button>
                         </div>
                         <div class="col">
                             <span>Chưa có tài khoản ?</span>
-                            <a asp-controller="User" asp-action="Register">Đăng ký ngay</a> 
+                            <a asp-controller="User" asp-action="Register">Đăng ký ngay</a>
                         </div>
                     </div>
                 </form>
