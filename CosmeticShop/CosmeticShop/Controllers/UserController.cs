@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CosmeticShop.Helper;
 
 namespace CosmeticShop.Controllers
 {
@@ -88,14 +89,30 @@ namespace CosmeticShop.Controllers
         [HttpPost]
         public IActionResult Register(UserRegisterViewModel vm)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Users.Add(vm.User);
                 _context.SaveChanges();
+                string content = "Chúc Mừng: " + vm.User.NameLast + " " + vm.User.NameMiddle + " " + vm.User.NameFirst;
+                content += "<br>Đẵ Đăng Kí Thành Công  ";
+                content += "<br>Click vô đây xác nhận đăng nhập: https://cosmeticshop20.azurewebsites.net/User/Login";
+                //bool a = MailHelper.Send(vm.User.Email, vm.User.Email, "Chúc Mừng Bạn Đã Đăng Kí Thành Công", content);
+                if (MailHelper.Send(vm.User.Email, vm.User.Email, "Chúc Mừng Bạn Đã Đăng Kí Thành Công", content))
+                {
+                    ViewBag.msg = "Success";
+                }
+                else
+                {
+                    ViewBag.msg = "Fail";
+                }
+
                 return RedirectToAction("Login");
             }
             else
             {
+
+               
                 return View(
                     new UserRegisterViewModel()
                     {
